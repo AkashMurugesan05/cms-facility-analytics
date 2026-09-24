@@ -82,6 +82,23 @@ Interactive Facility Analytics
 Executive Reporting & PDF Generation
 ```
 
+## Backend & API
+
+The backend is developed using Python and FastAPI and provides REST API endpoints for the frontend analytics modules.
+
+The API layer handles:
+
+- Facility search and retrieval
+- Facility summary information
+- Historical performance data
+- Staffing analytics
+- Quality measure data
+- Health inspection data
+- Facility comparisons
+- State and national benchmark data
+- Executive reporting data
+
+The frontend JavaScript modules consume these API endpoints to display interactive facility analytics.
 
 ## Analytics Architecture
 
