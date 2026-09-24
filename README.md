@@ -80,7 +80,7 @@ JavaScript Frontend
 Interactive Facility Analytics
         ↓
 Executive Reporting & PDF Generation
-
+```
 
 
 ## Analytics Architecture
@@ -101,11 +101,12 @@ JavaScript Dashboard
 Interactive Analytics
       ↓
 Executive Reporting / PDF
-
+```
 
 
 ## Project Structure
 
+```text
 cms-facility-analytics/
 ├── Api/
 │   ├── main.py
@@ -133,11 +134,11 @@ cms-facility-analytics/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
-
+```
 
 ## Technology Stack
 
+```text
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Python, FastAPI
 - **Database:** PostgreSQL
@@ -150,3 +151,4 @@ cms-facility-analytics/
 - **Reporting:** HTML/CSS, Python-based PDF generation
 - **AI Integration:** Gemini API
 - **API Architecture:** REST APIs
+```
