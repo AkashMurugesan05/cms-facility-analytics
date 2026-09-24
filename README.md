@@ -6,6 +6,19 @@ A full-stack healthcare facility analytics platform designed to transform CMS fa
 
 This project combines data processing, database management, backend API development, frontend dashboards, and automated reporting into a single analytics platform.
 
+## Business Problem
+
+Healthcare facility data is available across multiple datasets and performance categories, making it difficult to analyze facility performance from a single view.
+
+This project addresses that problem by bringing facility-level data into a centralized analytics platform that enables users to:
+
+- Search and identify healthcare facilities
+- Review facility performance across multiple categories
+- Compare facility results with state and national benchmarks
+- Analyze staffing, quality, inspection, and stay-related metrics
+- Identify areas requiring operational attention
+- Generate executive-level reports for periodic review
+
 The application allows users to search and analyze healthcare facilities and explore areas such as:
 
 - Overall facility ratings
