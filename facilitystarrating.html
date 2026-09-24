@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rating Analytics | CMS</title>
+    <!-- Include same styles as facility.html -->
+</head>
+<body>
+    <main>
+        <h1>Star Rating Analytics</h1>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Overall Rating</h3>
+                <div id="bigRatingValue"></div>
+            </div>
+            <div class="metric-card">
+                <h3>12-Month Trend</h3>
+                <canvas id="longTrendChart"></canvas>
+            </div>
+            <div class="metric-card">
+                <h3>State Distribution</h3>
+                <canvas id="distributionChart"></canvas>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/facilitystarrating.js"></script>
+</body>
+</html>

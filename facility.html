@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility Dashboard | CMS Analytics</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Premium spotlight background with a light blue tint */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Display", "Segoe UI", Roboto, sans-serif; 
+            background-color: #f0f9ff; 
+            background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, #e0f2fe 100%);
+            background-attachment: fixed;
+            color: #0f172a; 
+            line-height: 1.5; 
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* Seamless Elevated Header - Deep Blue */
+        header { 
+            background: #6367FF;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 12px 0; 
+            position: sticky; top: 0; z-index: 50;
+        }
+        .nav-container { width: 95%; max-width: 1900px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+
+        header h1 { font-size: 1.35rem; font-weight: 1100; color: #ffffff; letter-spacing: -0.03em; white-space: nowrap; }
+        
+        /* Premium Header Search */
+        .header-search { position: relative; flex: 1; max-width: 450px; }
+        .search-input { 
+            width: 100%; padding: 12px 18px; font-size: 0.95rem; color: #0f172a; 
+            background: #f1f5f9; border: 1px solid transparent; border-radius: 10px; outline: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .search-input:focus { background: #ffffff; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        .search-input::placeholder { color: #94a3b8; }
+        
+        .autocomplete-list { position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 99; background: #ffffff; border-radius: 12px; max-height: 250px; overflow-y: auto; box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 10px 40px -10px rgba(0,0,0,0.1); color: #0f172a; }
+        .autocomplete-item { padding: 12px 18px; cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.03); font-size: 0.95rem; }
+        .autocomplete-item:hover { background-color: #f8fafc; color: #2563eb; }
+        .autocomplete-item:last-child { border-bottom: none; }
+
+        header nav { display: flex; gap: 28px; white-space: nowrap; }
+        header nav a { color: #feffff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+        header nav a:hover { color: #0f172a; }
+        
+        /* AI Report Download Button */
+        .ai-download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #6367FF; 
+            color: #ffffff !important;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(99, 103, 255, 0.2);
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ai-download-btn:hover {
+            background-color: #4f52cc; 
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(99, 103, 255, 0.3);
+        }
+
+        /* Compact Dashboard Layout */
+        main { flex: 1; width: 95%; max-width: 1900px; margin: 0 auto; padding: 24px 20px; }
+        
+        .dashboard-header { 
+            background: #ffffff; 
+            border-radius: 16px; 
+            padding: 20px 24px; 
+            margin-bottom: 24px; 
+            box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px; 
+            position: relative; 
+            overflow: hidden;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 12px;
+        }
+        .dashboard-header::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 16px 16px 0 0;
+        }
+        
+        .facility-title { font-size: 1.6rem; font-weight: 800; color: #6367FF; margin: 0; letter-spacing: -0.03em; line-height: 1.2; }
+        .facility-meta { font-size: 1rem; color: #64748b; display: flex; align-items: center; gap: 12px; font-weight: 500; margin: 0; }
+        .badge { background-color: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.03em; }
+        
+        .metrics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, 240px); 
+            gap: 12px; 
+            margin-bottom: 20px; 
+            justify-content: center; 
+        }
+
+        .metric-card { 
+            background: #ffffff; 
+            border-radius: 12px; 
+            padding: 12px; 
+            text-align: center; 
+            box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px; 
+            height: 142px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .metric-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.979), 0 8px 20px -8px rgba(0,0,0,0.08); 
+        }
+        
+        .metric-title { font-size: 0.7rem; font-weight: 900; color: #8494FF; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em; }
+        .metric-value { font-size: 2rem; font-weight: 800; color: #000000; letter-spacing: -0.03em; line-height: 1; }
+        .metric-value.stars { color: #070707; font-size: 1.6rem; }
+        
+        .loading-msg { text-align: center; padding: 40px; font-size: 1.1rem; color: #94a3b8; }
+        .error-msg { text-align: center; padding: 40px; font-size: 1.1rem; color: #ef4444; display: none; }
+        
+        footer { padding: 24px 0; text-align: center; font-size: 0.85rem; color: #94a3b8; margin-top: auto; border-top: 1px solid rgba(241, 6, 6, 0.04); }
+        
+        #ratingTrendChart, #comparisonChart, #execCasemixChart, #execClinicalChart, #execDeficienciesChart, #execTurnoverChart, #execPenaltiesChart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .metric-card canvas {
+            max-height: 50px !important; 
+        }
+        /* Target all executive analytics chart canvases to fill their cards properly */
+        #comparisonChart, #execCasemixChart, #execClinicalChart, #execDeficienciesChart, #execTurnoverChart, #execPenaltiesChart {
+            max-height: 100% !important; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <div class="nav-container">
+                <h1>CMS Analytics</h1>
+                
+                <div class="header-search">
+                    <input type="text" id="quickSearch" class="search-input" placeholder="Search another facility..." autocomplete="off">
+                    <div id="quickAutocomplete" class="autocomplete-list"></div>
+                </div>
+
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="search.html">Filter's Page</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div id="loading" class="loading-msg">Fetching facility data from the database...</div>
+            <div id="errorBox" class="error-msg"></div>
+
+            <div id="dashboardContent" style="display: none;">
+                <!-- EXPANDED DASHBOARD HEADER -->
+                <div class="dashboard-header" style="display: flex; flex-direction: column; align-items: stretch; width: 100%; gap: 16px;">
+                    <!-- Top Title Bar -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 12px;">
+                        <div style="text-align: left;">
+                            <h2 id="facilityName" class="facility-title" style="text-align: left;">Facility Name</h2>
+                            <p id="facilityLegalName" style="font-size: 0.85rem; color: #64748b; font-style: italic; margin-top: 2px;">Legal Name: N/A</p>
+                        </div>
+                        
+                        <div class="facility-meta" style="display: flex; align-items: center; gap: 12px;">
+                            <span id="facilityLocation" style="font-weight: 700; color: #0f172a;">City, State</span>
+                            <span class="badge" style="font-size: 0.85rem; padding: 6px 12px;">CCN: <span id="facilityCCN">000000</span></span>
+                            
+                            <!-- AI PDF Download Button -->
+                            <a id="aiDownloadBtn" href="#" class="ai-download-btn" target="_blank" onclick="this.innerHTML='⏳ Generating...'; setTimeout(() => this.innerHTML='📄 AI Executive Report', 7000);">
+                                📄 AI Executive Report
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2-Column Detailed Facility Information Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; font-size: 0.9rem; color: #334155; width: 100%;">
+                        
+                        <!-- Left Column: Facility Contact & Operations -->
+                        <div style="background: #f8fafc; padding: 14px 18px; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 8px; text-align: left;">
+                            <div style="font-weight: 800; font-size: 0.75rem; color: #6367FF; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Facility Details</div>
+                            <div><strong>Street Address:</strong> <span id="facilityStreet">N/A</span></div>
+                            <div><strong>Telephone:</strong> <span id="facilityPhone">N/A</span></div>
+                            <div><strong>Provider Type:</strong> <span id="facilityType">N/A</span></div>
+                            <div><strong>Ownership Structure:</strong> <span id="facilityOwnership">N/A</span></div>
+                            <div><strong>Special Focus Status:</strong> <span id="facilitySpecialFocus" class="badge" style="background: #fef2f2; color: #dc2626;">None</span></div>
+                        </div>
+
+                        <!-- Right Column: Chain, Census & Ownership Status -->
+                        <div style="background: #f8fafc; padding: 14px 18px; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 8px; text-align: left;">
+                            <div style="font-weight: 800; font-size: 0.75rem; color: #6367FF; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Chain & Census Metrics</div>
+                            <div><strong>Chain Name:</strong> <span id="facilityChainName">N/A</span></div>
+                            <div><strong>Facilities in Chain:</strong> <span id="facilityChainCount">N/A</span></div>
+                            <div><strong>Certified Beds / Avg Residents:</strong> <span id="facilityBedsRes">N/A</span></div>
+                            <div><strong>Ownership Changed (Last 12 Mo):</strong> <span id="facilityOwnershipChanged">No</span></div>
+                            <div><strong>Certified Since:</strong> <span id="facilityCertifiedSince">N/A</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI METRICS GRID -->
+                <div class="metrics-grid">
+                    
+                    <a href="facilitystarrating.html?ccn=145696" style="text-decoration: none; color: inherit;">
+                        <div class="metric-card" style="cursor: pointer;">
+                            <div class="metric-title">Facility Rating</div>
+                            <div id="overallRating" class="metric-value stars"></div>
+                            <div style="margin-top: 12px; height: 45px; position: relative; width: 100%;">
+                                <canvas id="ratingTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </a>
+                   
+                    <div class="metric-card">
+                        <div class="metric-title">Chain Rating</div>
+                        <div id="chainRating" class="metric-value stars"></div>
+                        <div style="margin-top: 12px; height: 45px; position: relative; width: 100%;">
+                            <canvas id="chainTrendChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <a href="QMRating.html?ccn=145696" style="text-decoration: none; color: inherit;">
+                        <div class="metric-card" style="cursor: pointer;">
+                            <div class="metric-title">QM Rating</div>
+                            <div id="qmRating" class="metric-value stars"></div>
+                            <div style="margin-top: 12px; height: 45px; position: relative; width: 100%;">
+                                <canvas id="qmTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="healthispection.html?ccn=145696" style="text-decoration: none; color: inherit;">
+                        <div class="metric-card" style="cursor: pointer;">
+                            <div class="metric-title">Health Inspection</div>
+                            <div id="healthRating" class="metric-value stars"></div>
+                            <div style="margin-top: 12px; height: 45px; position: relative; width: 100%;">
+                                <canvas id="healthTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </a>
+                
+                    <!-- Beds: Occupancy Panel -->
+                    <div class="metric-card" style="display: flex; flex-direction: column; padding: 10px; height: 142px;">
+                        <div class="metric-title" style="flex-shrink: 0; text-align: center; margin-bottom: 2px;">Beds: Occupancy</div>
+                        <div id="occPercent" style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: #000000;">0%</div>
+                        <div style="flex-shrink: 0; display: flex; justify-content: space-around; border-top: 1px solid #f1f5f9; padding-top: 5px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 0.55rem; color: #000000; font-weight: 700;">OCCUPIED</div>
+                                <div id="occCount" style="font-size: 0.9rem; font-weight: 800; color: #080808;">0</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 0.55rem; color: #000000; font-weight: 700;">VACANT</div>
+                                <div id="vacCount" style="font-size: 0.9rem; font-weight: 800; color: #080808;">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- EXECUTIVE PERFORMANCE ANALYTICS (6-Chart Grid) -->
+                <div style="margin-top: 30px; margin-bottom: 30px;">
+                    <h3 style="font-size: 1.1rem; font-weight: 800; color: #6367FF; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 0.05em;">Executive Performance Analytics</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        
+                        <!-- Chart 1: Star Ratings Comparison -->
+                        <div class="metric-card" style="grid-column: span 1; height: 440px; padding: 20px; display: flex; flex-direction: column; width: 100%;">
+                            <div class="metric-title" style="text-align: center; margin-bottom: 10px;">
+                                STAR RATINGS: <span id="compFacilityName">FACILITY</span> VS. <span id="compChainName">CHAIN</span> VS. STATE VS. NAT'L
+                            </div>
+                            <div style="position: relative; width: 100%; height: 350px;">
+                                <canvas id="comparisonChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 2: Case-Mix vs Reported Staffing -->
+                        <div class="metric-card" style="grid-column: span 1; height: 440px; padding: 20px; display: flex; flex-direction: column; width: 100%;">
+                            <div class="metric-title" style="text-align: center; margin-bottom: 10px;">Case-Mix Adjusted vs. Reported Staffing</div>
+                            <div style="position: relative; width: 100%; height: 350px;">
+                                <canvas id="execCasemixChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 3: Clinical Risk & Quality Benchmarks -->
+                        <div class="metric-card" style="grid-column: span 1; height: 440px; padding: 20px; display: flex; flex-direction: column; width: 100%;">
+                            <div class="metric-title" style="text-align: center; margin-bottom: 10px;">Clinical Quality Risk vs. National Benchmark</div>
+                            <div style="position: relative; width: 100%; height: 350px;">
+                                <canvas id="execClinicalChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 4: Deficiencies by Category -->
+                        <div class="metric-card" style="grid-column: span 1; height: 440px; padding: 20px; display: flex; flex-direction: column; width: 100%;">
+                            <div class="metric-title" style="text-align: center; margin-bottom: 10px;">Recent Health Deficiencies by Category</div>
+                            <div style="position: relative; width: 100%; height: 350px;">
+                                <canvas id="execDeficienciesChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 5: Workforce Turnover Risk -->
+                        <div class="metric-card" style="grid-column: span 1; height: 440px; padding: 20px; display: flex; flex-direction: column; width: 100%;">
+                            <div class="metric-title" style="text-align: center; margin-bottom: 10px;">Workforce & Staff Turnover vs. Benchmarks</div>
+                            <div style="position: relative; width: 100%; height: 350px;">
+                                <canvas id="execTurnoverChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 6: Financial Penalties & Enforcement Actions -->
+                        <div class="metric-card" style="grid-column: span 1; height: 440px; padding: 20px; display: flex; flex-direction: column; width: 100%;">
+                            <div class="metric-title" style="text-align: center; margin-bottom: 10px;">Compliance Enforcement & Penalties Summary</div>
+                            <div style="position: relative; width: 100%; height: 350px;">
+                                <canvas id="execPenaltiesChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- FINANCIAL KPI CARD (Value-Based Purchasing Multiplier) -->
+                <div style="margin-bottom: 40px;">
+                    <div class="metric-card" style="width: 100%; height: 160px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <div class="metric-title" style="text-align: center; margin-bottom: 6px;">Value-Based Purchasing (VBP) Financial Multiplier Impact</div>
+                        <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 20px;">
+                            <div id="vbpMultiplierVal" style="font-size: 2.5rem; font-weight: 900; color: #2563eb;">1.000x</div>
+                            <p id="vbpDesc" style="font-size: 0.85rem; color: #475569; text-align: left; max-width: 400px; margin: 0;">Neutral baseline payment adjustment based on Medicare readmission and infection tracking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="nav-container">
+                <p>&copy; 2026 CMS Analytics Platform.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Final script cleanup -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="js/facility.js"></script>
+</body>
+</html>
