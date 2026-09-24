@@ -72,7 +72,6 @@ cms-facility-analytics/
 
 
 
-```markdown
 ## Technology Stack
 
 - **Frontend:** HTML, CSS, JavaScript
