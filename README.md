@@ -69,3 +69,16 @@ cms-facility-analytics/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
+
+
+```markdown
+## Technology Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python, FastAPI
+- **Database:** PostgreSQL
+- **Data Processing:** Python, Pandas, OpenPyXL
+- **Reporting:** HTML/CSS, Python-based PDF generation
+- **AI Integration:** Gemini API
+- **API Architecture:** REST APIs
