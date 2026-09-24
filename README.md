@@ -6,6 +6,19 @@ A full-stack healthcare facility analytics platform designed to transform CMS fa
 
 This project combines data processing, database management, backend API development, frontend dashboards, and automated reporting into a single analytics platform.
 
+The application allows users to search and analyze healthcare facilities and explore areas such as:
+
+- Overall facility ratings
+- Staffing and staffing trends
+- Quality measures
+- Health inspections
+- Long-stay performance
+- Short-stay performance
+- Facility comparisons
+- State and national benchmarks
+- Executive-level analytics
+- Automated executive report generation
+
 ## Business Problem
 
 Healthcare facility data is available across multiple datasets and performance categories, making it difficult to analyze facility performance from a single view.
@@ -19,18 +32,32 @@ This project addresses that problem by bringing facility-level data into a centr
 - Identify areas requiring operational attention
 - Generate executive-level reports for periodic review
 
-The application allows users to search and analyze healthcare facilities and explore areas such as:
+## Key Features
 
-- Overall facility ratings
-- Staffing and staffing trends
-- Quality measures
-- Health inspections
-- Long-stay performance
-- Short-stay performance
-- Facility comparisons
-- State and national benchmarks
-- Executive-level analytics
-- Automated executive report generation
+### Facility Discovery
+- Search healthcare facilities by facility information
+- View facility-level performance and statistics
+- Access facility-specific analytics through a centralized interface
+
+### Performance Analytics
+- Overall facility performance analysis
+- Quality measure analysis
+- Staffing analysis and trends
+- Health inspection and compliance analysis
+- Long-stay and short-stay performance analysis
+- Facility-level historical analysis
+
+### Comparative Analytics
+- Facility-to-facility comparison
+- State-level benchmarking
+- National benchmarking
+- Performance trend analysis
+
+### Executive Reporting
+- Automated executive-level reporting
+- HTML-based newsletter templates
+- PDF report generation
+- Facility performance summaries and key metrics
 
 ## Analytics Architecture
 
