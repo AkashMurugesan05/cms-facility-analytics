@@ -1,3 +1,9 @@
+
+<p align="center">
+  <img src="screenshots/banner.png" alt="CMS Healthcare Facility Analytics Platform">
+</p>
+
+
 # CMS Healthcare Facility Analytics Platform
 
 A full-stack healthcare facility analytics platform designed to transform CMS facility data into interactive dashboards, comparative analytics, operational insights, and automated executive reporting.
