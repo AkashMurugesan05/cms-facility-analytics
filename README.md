@@ -1,4 +1,4 @@
-# CMS Healthcare Facility Analytics Platform
+8# CMS Healthcare Facility Analytics Platform
 
 A full-stack healthcare facility analytics platform designed to transform CMS facility data into interactive dashboards, comparative analytics, operational insights, and automated executive reporting.
 
@@ -58,6 +58,30 @@ This project addresses that problem by bringing facility-level data into a centr
 - HTML-based newsletter templates
 - PDF report generation
 - Facility performance summaries and key metrics
+
+
+## Data Pipeline
+
+The platform follows a structured data processing and analytics pipeline:
+
+```text
+CMS / Raw Facility Data
+        ↓
+Python Data Processing
+        ↓
+Data Cleaning & Transformation
+        ↓
+PostgreSQL Database
+        ↓
+FastAPI REST API
+        ↓
+JavaScript Frontend
+        ↓
+Interactive Facility Analytics
+        ↓
+Executive Reporting & PDF Generation
+
+
 
 ## Analytics Architecture
 
