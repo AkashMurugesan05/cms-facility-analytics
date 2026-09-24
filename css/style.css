@@ -1,0 +1,269 @@
+/* ================================
+   CARE PERFORMANCE ANALYTICS
+   Main Stylesheet
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:#07111F;
+
+    color:white;
+
+}
+
+/* ================================
+   NAVIGATION
+================================ */
+
+.navbar{
+
+    width:95%;
+
+    max-width:1400px;
+
+    margin:30px auto;
+
+    padding:20px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(18px);
+
+    position:sticky;
+
+    top:20px;
+
+}
+
+.logo h1{
+
+    font-size:28px;
+
+}
+
+.logo p{
+
+    color:#8da3bf;
+
+    margin-top:6px;
+
+    font-size:14px;
+
+}
+
+.search{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.search input{
+
+    width:100%;
+
+    max-width:450px;
+
+    padding:14px 20px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:40px;
+
+    background:#0e1b30;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.search input::placeholder{
+
+    color:#8da3bf;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:25px;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#22D3EE;
+
+}
+
+/* ================================
+   FACILITY HERO
+================================ */
+
+.facility-hero{
+
+    width:95%;
+    max-width:1400px;
+
+    margin:30px auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    align-items:flex-start;
+
+}
+
+.facility-info{
+
+    flex:2;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    backdrop-filter:blur(18px);
+
+}
+
+.facility-info h2{
+
+    font-size:36px;
+
+    margin-bottom:10px;
+
+}
+
+.legal-name{
+
+    color:#94A3B8;
+
+    margin-bottom:30px;
+
+    font-size:18px;
+
+}
+
+.facility-details{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.detail-item{
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
+
+    color:#d8e3ef;
+
+}
+
+.detail-item i{
+
+    color:#22D3EE;
+
+    font-size:20px;
+
+    width:25px;
+
+}
+
+.overall-rating{
+
+    flex:1;
+
+}
+
+.rating-card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(18px);
+
+    padding:40px;
+
+    text-align:center;
+
+}
+
+.stars{
+
+    font-size:32px;
+
+    color:#FBBF24;
+
+    margin-bottom:20px;
+
+}
+
+.rating-card h1{
+
+    font-size:64px;
+
+    color:#22D3EE;
+
+}
+
+.rating-card p{
+
+    margin-top:15px;
+
+    color:#94A3B8;
+
+}
