@@ -81,3 +81,8 @@ cms-facility-analytics/
 - **Reporting:** HTML/CSS, Python-based PDF generation
 - **AI Integration:** Gemini API
 - **API Architecture:** REST APIs
+
+
+- **Reporting:** HTML/CSS, Python-based PDF generation
+- **AI Integration:** Gemini API
+- **API Architecture:** REST APIs
